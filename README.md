@@ -1,4 +1,4 @@
-# Comparison-of-Autonomous-Driving-IL-Pipeline-for-Ego-Vehicle-Changes
+# Comparison of Autonomous Driving Imitation Learning Pipeline for Ego-Vehicle Changes
 
 This repository contains source codes and demo video for the experiments in our paper "A Comparison of Imitation Learning Pipelines for Autonomous Driving on the Effect of Change in Ego-vehicle". Below are demo videos of the results. The source codes will be uploaded soon.
 
