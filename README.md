@@ -2,9 +2,11 @@
 
 This repository contains source codes and demo video for the experiments in our paper "A Comparison of Imitation Learning Pipelines for Autonomous Driving on the Effect of Change in Ego-vehicle". Below are demo videos of the results. The source codes will be uploaded soon.
 
-| **[Project Page](https://ailab.space/projects/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/) | [Paper](https://ailab.space/wp-content/uploads/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/IV24_0299_FI.pdf) | [Poster](https://ailab.space/wp-content/uploads/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/MoPo2I4.12-Poster.pdf)** |
+## | [Paper](https://ailab.space/wp-content/uploads/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/IV24_0299_FI.pdf) | [Poster](https://ailab.space/wp-content/uploads/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/MoPo2I4.12-Poster.pdf) | [Project Page](https://ailab.space/projects/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/) |
 
 # Demo Video
+
+All videos can be found [here](https://www.youtube.com/playlist?list=PLT6vZE-j-Q_txkFGr4UAbPygAfNeKJL9n)
 
 ## TransFuser
 
@@ -50,7 +52,7 @@ This implementation is based on code from several repositories:
 # Publications
 If you have used this repository in any of your scientific work, please consider citing my work:
 
-```
+```bibtex
 @inproceedings{Noorsyamimi2024IV,
   author = {Abdur Ajak, Noorsyamimi and
             Ong, Wee Hong and
