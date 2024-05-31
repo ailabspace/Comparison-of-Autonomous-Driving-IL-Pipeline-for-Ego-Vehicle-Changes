@@ -2,7 +2,7 @@
 
 This repository contains source codes and demo video for the experiments in our paper "A Comparison of Imitation Learning Pipelines for Autonomous Driving on the Effect of Change in Ego-vehicle". Below are demo videos of the results. The source codes will be uploaded soon.
 
-| [Project Page](https://ailab.space/projects/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/) | [Paper](https://ailab.space/wp-content/uploads/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/IV24_0299_FI.pdf) | [Poster](https://ailab.space/wp-content/uploads/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/MoPo2I4.12-Poster.pdf) |
+| **[Project Page](https://ailab.space/projects/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/) | [Paper](https://ailab.space/wp-content/uploads/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/IV24_0299_FI.pdf) | [Poster](https://ailab.space/wp-content/uploads/improving-egovehicle-control-in-deep-learning-training-pipeline-for-autonomous-cars/MoPo2I4.12-Poster.pdf)** |
 
 # Demo Video
 
