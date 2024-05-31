@@ -50,7 +50,7 @@ This implementation is based on code from several repositories:
 
 
 # Publications
-If you have used this repository in any of your scientific work, please consider citing my work:
+If you have used this repository in any of your scientific work, please consider citing our work:
 
 ```bibtex
 @inproceedings{Noorsyamimi2024IV,
