@@ -1,5 +1,5 @@
-export CARLA_ROOT=${1:-/home/mrzk9/transfuser/carla}
-export WORK_DIR=${2:-/home/mrzk9/transfuser}
+export CARLA_ROOT=${1:-/home/yourmachine/transfuser/carla}
+export WORK_DIR=${2:-/home/yourmachine/transfuser}
 
 export CARLA_SERVER=${CARLA_ROOT}/CarlaUE4.sh
 export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI
