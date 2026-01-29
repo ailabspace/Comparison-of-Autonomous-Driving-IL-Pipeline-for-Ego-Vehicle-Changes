@@ -158,7 +158,7 @@ transfuser/tools/result_parser.py
 CUDA_VISIBLE_DEVICES=0 ./CILv2_multiview/run_CARLA_driving/scripts/run_evaluation/CILv2/leaderboard_Town05.sh
 ```
 
-Due to variability in CARLA simulation results, **each experiment was repeated three times,** and the results were averaged.
+**Note:** Due to variability in CARLA simulation results for both IL models, **each experiment was repeated three times,** and the results were averaged.
 
 # Changing the Ego-Vehicle
 To evaluate the performance of the trained models on *different ego-vehicles* in CARLA, follow the instructions below for each pipeline:
