@@ -6,31 +6,28 @@ This repository contains source codes and demo video for the experiments in our 
 
 # Contents
 
-1. [Using the Modified Implementations](#using-the-modified-implementations)
-2. [Running an Agent](#running-an-agent)
-3. [Changing the Ego-Vehicle](#changing-the-ego-vehicle)
+1. [Overview and Base Repositories](#overview-and-base-repositories)
+2. [Using the Modified Implementations](#using-the-modified-implementations)
+3. [Running an Agent](#running-an-agent)
+4. [Changing the Ego-Vehicle](#changing-the-ego-vehicle)
 
-# Overview
-This repository provides evaluation implementations of two imitation learning (IL) pipelines for autonomous driving, with the goal of assessing **vehicle adaptability** i.e deploying trained autonomous driving models on ego-vehicles with different physical properties *without retraining.*
+# Overview and Base Repositories
 
-We adapt and extend two public codebases:
-* [TransFuser](https://github.com/autonomousvision/transfuser) – a waypoint-based IL model
-* [CIL++](https://github.com/yixiao1/CILv2_multiview) – a control-based IL model
+This repository provides evaluation implementations of two imitation learning (IL) pipelines for autonomous driving, with the goal of assessing **vehicle adaptability**, i.e. deploying trained autonomous driving models on ego-vehicles with different physical properties **without retraining**.
 
-This repository provides the **routes, experiment setup, and evaluation procedure** used in CARLA, while keeping the original training and evaluation pipelines of the base repositories intact.
+The experiments are conducted in CARLA by adapting and extending the following public codebases:
 
-# Base Repositories
+- **[TransFuser](https://github.com/autonomousvision/transfuser)**  
+  A waypoint-based imitation learning model that uses multi-sensor fusion to predict future waypoints.
 
-This work is built on top of the following public repositories:
-* [TransFuser](https://github.com/autonomousvision/transfuser)
-Selected as the representative for waypoint-based IL model. TransFuser uses multi-sensor fusion to predict waypoints.
+- **[CIL++](https://github.com/yixiao1/CILv2_multiview)**  
+  A control-based imitation learning model that directly predicts low-level control signals (steering angle, throttle, and brake).
 
-* [CIL++](https://github.com/yixiao1/CILv2_multiview) 
-Selected as the representative for the control-based IL model. CIL++ directly predicts low-level control signals (steering angle, throttle and brake).
-  
+This repository provides the **routes, experiment setup, and evaluation procedure** used in our study, while keeping the **original training and evaluation pipelines** of the base repositories intact.
+
 For installation, training, and evaluation, you can refer to the **original instructions** provided by each repository.
 
-This repository only includes **modifications necessary to enable ego-vehicle changes in the experiments.**
+This repository only includes **modifications necessary to enable ego-vehicle changes and synchronized CARLA Leaderboard evaluation for all IL models**.
 
 # Using the Modified Implementations
 
@@ -45,14 +42,14 @@ To use our modified code for evaluation, **replace the corresponding folders in 
  ./transfuser/leaderboard/data
 ```
 
-2. Insert the folders (provided in this repository under `TransFuser/` folder):
+2. Insert the following folders (provided in this repository under `TransFuser/` folder) in the directory:
 ```
 leaderboard_town05/
 scenarios/
 ```
 
 3. The `leaderboard_town05/` folder contains:
-* `town05_navigation` route file.
+* `town05_navigation.xml` route file.
 
 4. The `scenarios/` folder contains:
 * `no_scenarios.json` scenario file.
@@ -72,12 +69,64 @@ export ROUTES=${WORK_DIR}/leaderboard/data/leaderboard_town05/Town05_navigation.
 ```
 
 ## CIL++
-(TBA)
-1. 
+
+### Route Scenario
+
+1. Locate the following file in the original CIL++ repository:
+```
+./CILv2_multiview/run_CARLA_driving/driving/scenarios/route_scenario.py
+```
+
+2. Replace the original `route_scenario.py` file with the version provided in this repository (under `cil++/scenarios/` folder).
+
+This modification enables the **CARLA Leaderboard collision criterion**, as the original CIL++ implementation is configured for the **NoCrash** experimental setting.
+
+### Leaderboard Script
+
+1. Locate the following directory in CIL++ repository:
+```
+./CILv2_multiview/run_CARLA_driving/scripts/run_evaluation/CILv2/
+```
+
+2. Insert the script:
+```
+leaderboard_Town05.sh
+``` 
+(provided in this repository under `cil++/CILv2/`) into this directory.
+
+
+### Routes & Scenarios
+
+
+1. Locate the following directory in CIL++ repository:
+
+```
+./CILv2_multiview/run_CARLA_driving/data/leaderboard
+```
+
+2. Insert the following files in `leaderboard/` directory (provided in this repository under `cil++/leaderboard/`):
+
+* `leaderboard_Town05.json` — scenario file
+* `Town05_navigation.xml` — route file.
+
+These files defined the the Town05 evaluation setup used in our experiments.
+
+3. Locate the evaluation script (sample available in the `cil++/CILv2/` folder):
+```
+./CILv2_multiview/run_CARLA_driving/scripts/run_evaluation/CILv2/leaderboard_Town05.sh
+``` 
+
+Update the route and scenario paths as follows:
+
+```
+--scenarios=${DRIVING_TEST_ROOT}/data/leaderboard/leaderboard_Town05.json  \
+--routes=${DRIVING_TEST_ROOT}/data/leaderboard \ # it will pick up the xml file without specifying the exact file
+```
+
 
 # Running an Agent
 
-# TransFuser
+## TransFuser
 1. Start the CARLA server:
 
 ```
@@ -89,25 +138,27 @@ export ROUTES=${WORK_DIR}/leaderboard/data/leaderboard_town05/Town05_navigation.
 CUDA_VISIBLE_DEVICES=0 ./transfuser/leaderboard/scripts/local_evaluation.sh
 ```
 
-3. **Result Processing**
+3. Perform result processing:
 The raw evaluation outputs are post-processed using:
 
 ```
 transfuser/tools/result_parser.py
 ```
 
-Due to variability in CARLA simulation results, **each experiment was repeated three times,** and the results were averaged.
-
-# CIL++
+## CIL++
 
 1. Start the CARLA server:
 
 ```
+./CarlaUE4.sh --world-port=2000 -opengl
 ```
 
 2. Run the evaluation script:
 ```
+CUDA_VISIBLE_DEVICES=0 ./CILv2_multiview/run_CARLA_driving/scripts/run_evaluation/CILv2/leaderboard_Town05.sh
 ```
+
+Due to variability in CARLA simulation results, **each experiment was repeated three times,** and the results were averaged.
 
 # Changing the Ego-Vehicle
 To evaluate the performance of the trained models on *different ego-vehicles* in CARLA, follow the instructions below for each pipeline:
@@ -142,8 +193,23 @@ A full list of available vehicle blueprint IDs can be found in the CARLA documen
 https://carla.readthedocs.io/en/latest/catalogue_vehicles/
 
 ## CIL++
-(TBA)
-1. 
+
+1. Locate the following file:
+```
+./CILv2_multiview/run_CARLA_driving/data/leaderboard/leaderboard_Town05.json
+```
+
+2. Find the line specifying the ego-vehicle blueprint:
+```
+"vehicle_model": "vehicle.tesla.model3",
+```
+
+3. Modify the vehicle blueprint ID by replacing it with the desired vehicle.
+For example:
+
+```
+"vehicle_model": "vehicle.toyota.prius"
+```
 
 # Demo Video
 
